@@ -8,12 +8,29 @@
     <title>Code Quizzer</title>
 </head>
 <body>
-    <h3 id="highscoresTxt">View Highscores</h3>
-    <h3 id=timerTxt>Timer</h3>
-    <h1>Text your coding abilities here</h1>
-    <button>
+    <header>
+        <h3 id="highscoresTxt">View Highscores</h3>
+    <h3>Time: <span id='timerTxt'></span></h3>
+    </header>
+    <section id='introContainer'>
+         <h1>Test your coding abilities here</h1>
+         <p>Take a little time and test your knowledge of coding</p>
+    <button id="takeTestBtn">
         Take Test
     </button>
+    </section>
+    <section id="quiz">
+        <h2 id = questionTxt>Question</h2>
+        <ul id="answersList">
+            <li>A. <span id=a1></span> </li>
+            <li>B. <span id=a2></span> </li>
+            <li>C. <span id=a3></span> </li>
+            <li>D. <span id=a4></span> </li>
+            
+        </ul>
+    </section>
+    
+   
 
 <script src="./assets/js/script.js"></script>
 </body>

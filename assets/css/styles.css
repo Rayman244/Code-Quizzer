@@ -1,0 +1,10 @@
+header{
+    display: flex;
+    justify-content: space-between;
+}
+#introContainer{
+    text-align: center;
+}
+#quiz{
+    display:none
+}

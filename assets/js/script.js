@@ -1,13 +1,27 @@
+// Query Selectors
+// header
 var highscores = document.getElementById("highscoresTxt");
 var timerTxt = document.getElementById("timerTxt");
+// intro container
+var introContainer = document.getElementById("introContainer");
+var startBtn = document.getElementById("takeTestBtn");
+// quiz container
+var quizContainer = document.getElementById("quiz");
+var questionTxt = document.getElementById("questionTxt");
+var ans1 = document.getElementById("q1");
+var ans2 = document.getElementById("q2");
+var ans3 = document.getElementById("q3");
+var ans4 = document.getElementById("q4");
 
+// Question Class
 class Question {
-  constructor(question,answer, a1, a2, a3, a4) {
+  constructor(question, answer, a1, a2, a3, a4) {
     this.question = question;
     this.answer = answer;
     this.qs = [a1, a2, a3, a4];
   }
 }
+// Questions
 const q1 = new Question(
   "Inside which HTML element do we put the JavaScript?",
   "<script>",
@@ -18,32 +32,66 @@ const q1 = new Question(
 );
 const q2 = new Question(
   "How to change the text of an HTML element",
-   '.innerHTML',
-   '.text',
-   '.style',
-   '.body',
-   '.innerHTML',
+  ".innerHTML",
+  ".text",
+  ".style",
+  ".body",
+  ".innerHTML"
 );
-const q3 = new Question('Which method returns the length of the string?',
- '.length()',
- '.size(',
- '.index()',
- '.length()',
- 'None of the above');
+const q3 = new Question(
+  "Which method returns the length of the string?",
+  ".length()",
+  ".size(",
+  ".index()",
+  ".length()",
+  "None of the above"
+);
 
-const q4 = new Question("Whats the method that converts string to uppercase?",
-'.toUpperCase()',
-'.toUpperCase()',
-'.toString()',
-'.toLowercase()');
+const q4 = new Question(
+  "Whats the method that converts string to uppercase?",
+  ".toUpperCase()",
+  ".toUpperCase()",
+  ".toString()",
+  ".toLowercase()"
+);
 
-const q5 = new Question('How would you add a element to the end of an array?',
-".push()",
-'.join()',
-".pop()",
-".push()",
-".pull()"
-)
+const q5 = new Question(
+  "How would you add a element to the end of an array?",
+  ".push()",
+  ".join()",
+  ".pop()",
+  ".push()",
+  ".pull()"
+);
 
-const questions = [q1, q2,q3,q4,q5];
-console.log(questions);
+// Variables
+const questions = [q1, q2, q3, q4, q5];
+
+// timer
+function startTimer() {
+  var time = 5;
+  var timer = setInterval(function () {
+    timerTxt.textContent = `${time}`;
+    time--;
+    if (time == 0) {
+      clearInterval(timer);
+      alert(`You have exceeded the given time. \n Please try again!`);
+      reset()
+    }
+  }, 1000);
+}
+// reset
+function reset(){
+  timerTxt.textContent = "";
+  introContainer.style.display = "block";
+  quizContainer.style.display = "none";
+
+}
+// Start Quiz
+function start() {
+  introContainer.style.display = "none";
+  quizContainer.style.display = "block";
+  startTimer();
+}
+
+startBtn.addEventListener("click", start);
