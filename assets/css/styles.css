@@ -4,7 +4,15 @@ header{
 }
 #introContainer{
     text-align: center;
+    /* display: none; */
+
 }
 #quiz{
     display:none
+}
+#highscoresContainer{
+    display: none;
+}
+#endContainer{
+    display: none;
 }
