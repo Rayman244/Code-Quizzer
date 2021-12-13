@@ -24,6 +24,7 @@ var scoreTxt = document.getElementById('scoreTxt')
 var intlsTxtField = document.getElementById('initialsTxtField')
 var subBtn = document.getElementById('submitBtn')
 
+
 // Question Class
 class Question {
   constructor(question, answer, a1, a2, a3, a4) {
@@ -76,18 +77,14 @@ const q5 = new Question(
   ".pull()"
 );
 
-
-
-
-
 // Variables
 const questions = [q1, q2, q3, q4, q5];
 let score = 0
-let lastScore
-const highScores = []
-let index = 0;
+var highScores = JSON.parse(localStorage.getItem('highscores') || '[]')
+
 var time = 60;
 let timer;
+var index = 0
 const hState = highScoreContainer.getAttribute('data-active')
 const qState = quizContainer.getAttribute('data-active')
 // Highscores
@@ -98,7 +95,14 @@ function addHiScore(intls,scr){
       initials: intls,
       score: scr
     }
+    if(localStorage.getItem('highscores') == null){
+      localStorage.setItem('highscores',[])
+    }
+    
     highScores.push(hs)
+    localStorage.setItem('highscores', JSON.stringify(highScores))
+    highScores.sort((a,b)=>(a.score < b.score) ? 1 : -1)
+   
     // if(highScores.length=0){
     //    for(i=0; i < highScores.length - 1; i++){
     //     if(score > highScores[i].score){
@@ -128,9 +132,11 @@ function toggleHS(){
     highScoreContainer.style.display = 'block'
     introContainer.style.display = "none";
     quizContainer.style.display = "none"; 
+    endContainer.style.display = 'none'
     highScoreContainer.setAttribute('data-active','true')
-    
     highscoresTxt.textContent = 'Go Back'
+    lastScoreTxt.textContent = score
+    
   }else{
     reset()
   
@@ -139,13 +145,9 @@ function toggleHS(){
 }
 
 function loadHS(){  
-  if(highScoreUl.childNodes.length == 0){
-   addHiScore('RH', 40)
-   addHiScore('RH', 50)
-   addHiScore('RH', 50)
-   addHiScore('RH', 30)
-   addHiScore('RH', 10)
-  for(i=0;i<=highScores.length - 1;i++){
+  if(highScores){
+    highScores.sort((a,b)=>(a.score < b.score) ? 1 : -1)
+  for(i=0;i<=5;i++){
      var li = document.createElement('li')
     highScoreUl.appendChild(li)
     li.textContent = `${highScores[i].initials} ${highScores[i].score}`
@@ -177,21 +179,29 @@ function loadQuestions(index){
     ans3.textContent = q.qs[2]
     ans4.textContent = q.qs[3]
   }else{
-    toggleHS()
-    lastScoreTxt.textContent = lastScore
+    showFinished()
     index = 0
     clearInterval(timer)
   }
   
 
 }
-
+function subBtnPressed(){
+  const initlsTxt = intlsTxtField.value
+  if(initlsTxt === ''){
+    alert('Please enter initals')
+  }else{
+  
+    addHiScore(initlsTxt,score)
+    toggleHS()
+  }
+  
+}
 
 function selAnsw(e){
   var element = e.target
   if(element.textContent == questions[index].answer){
     score = score + 10
-   lastScore = score
    console.log(score);
   }
   index = index + 1
@@ -200,31 +210,40 @@ function selAnsw(e){
 
 }
 
-// Finished Quiz
-function showFinished(){
-  endContainer.style.display = 'block'
-  introContainer.style.display = 'none'
-  quizContainer.style.display = "none";
-  highScoreContainer.style.display = "none"
-
-}
-
-// reset
-function reset(){
-  timerTxt.textContent = "60";
-  introContainer.style.display = "block";
-  quizContainer.style.display = "none";
-  highScoreContainer.style.display = "none"
-  highscoresTxt.textContent = 'View Highscores'
-}
 // Start Quiz
 function start() {
   introContainer.style.display = "none";
   quizContainer.style.display = "block";
   loadQuestions(0)
   startTimer();
+  
+}// Finished Quiz
+function showFinished(){
+  endContainer.style.display = 'block'
+  introContainer.style.display = 'none'
+  quizContainer.style.display = "none";
+  highScoreContainer.style.display = "none"
+  scoreTxt.textContent = score
+
 }
+
+// reset
+function reset(){
+  score = 0
+  timerTxt.textContent = "60";
+  introContainer.style.display = "block";
+  quizContainer.style.display = "none";
+  highScoreContainer.style.display = "none"
+  highscoresTxt.textContent = 'View Highscores'
+  endContainer.style.display = 'none'
+  while(highScoreUl.firstChild){
+    highScoreUl.removeChild(highScoreUl.firstChild)
+  }
+}
+
+
 
 startBtn.addEventListener("click", start);
 quizContainer.addEventListener('click',selAnsw)
 highscoresTxt.addEventListener('click',toggleHS)
+subBtn.addEventListener('click',subBtnPressed)
