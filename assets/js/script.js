@@ -79,12 +79,13 @@ const q5 = new Question(
 // Variables
 const questions = [q1, q2, q3, q4, q5];
 let score = 00;
+var timer
 var highScores = JSON.parse(localStorage.getItem("highscores"));
 if (!highScores) {
   highScores = [];
 }
 
-let timer;
+let time;
 var index = 0;
 const hState = highScoreContainer.getAttribute("data-active");
 const qState = quizContainer.getAttribute("data-active");
@@ -145,7 +146,7 @@ function loadHS() {
 
 // timer
 function startTimer() {
-  var time = 60;
+  time = 60;
   timer = setInterval(function () {
     timerTxt.textContent = `${time}`;
     time--;
@@ -188,6 +189,7 @@ function selAnsw(e) {
     score = score + 10;
     console.log(score);
   }else{
+    time = time - 5
     score = score - 10
   }
   index = index + 1;
