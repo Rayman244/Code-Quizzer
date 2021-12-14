@@ -187,6 +187,8 @@ function selAnsw(e) {
   if (element.textContent == questions[index].answer) {
     score = score + 10;
     console.log(score);
+  }else{
+    score = score - 10
   }
   index = index + 1;
   loadQuestions(index);
