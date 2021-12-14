@@ -1,18 +1,112 @@
+
+body{
+    background-color: darkgray;
+}
+.container{
+    text-align: center;
+    background-color: blanchedalmond;
+    width: max-content;
+    margin: 10px auto;
+    padding:20px;
+    border: 2px solid black;
+    box-shadow: 8px 10px gray;
+    color: blueviolet;
+}
 header{
     display: flex;
     justify-content: space-between;
 }
+#highscoresBtn , #submitBtn{
+    background-color: blueviolet;
+    color: white;
+    margin: 15px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: grab;
+}
+#highscoresBtn:hover{
+    background-color: cyan;
+    color:black
+}
+#timeEl{
+    color:white;
+    background-color: blueviolet;
+    padding: 10px;
+    margin: auto 10px;
+}
 #introContainer{
     text-align: center;
-    /* display: none; */
+    color:blueviolet
 
 }
-#quiz{
-    display:none
+#introContainer h1{
+    font-size: 40px;
 }
+#introContainer p{
+    font-size: 20px;
+}
+#takeTestBtn{
+    background-color: blueviolet;
+    color: white;
+    cursor: grab;
+    font-size: 24px;
+    padding: 10px;
+}
+#quiz{
+    display:none;
+    font-size: 24px;
+}
+#answersList{
+    padding-inline-start: 0px;
+    font-size: 20px;
+}
+.answer{
+     background-color: blueviolet;
+     border-radius: 10px;
+     margin: 10px auto;
+     padding:10px;
+     width: max-content;
+     color: white;
+     list-style: none;
+}
+.answer:hover{
+    background-color: cyan;
+    color: black;
+}
+
 #highscoresContainer{
     display: none;
+    font-size: 20px;
+}
+#highscoresContainer h2{
+    font-size: 40px;
+}
+#highscoresContainer li{
+    color:white;
+    background-color:blueviolet;
+    padding: 0px 5px;
+    margin: 5px;
+    word-spacing: 20px;
+    list-style: decimal inside;
+    
+
+}
+#highScoreList{
+    padding-inline-start: 0px;
+    padding: 5px;
+    
 }
 #endContainer{
     display: none;
+    font-size: 20px;
+}
+#endContainer h2{
+    font-size: 24px;
+}
+#endContainer p {
+    font-size: 20px;
+}
+#initialsTxtField{
+    height: 20px
 }

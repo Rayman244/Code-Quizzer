@@ -1,6 +1,6 @@
 // Query Selectors
 // header
-var highscoresTxt = document.getElementById("highscoresTxt");
+var highscoresBtn = document.getElementById("highscoresBtn");
 var timerTxt = document.getElementById("timerTxt");
 // intro container
 var introContainer = document.getElementById("introContainer");
@@ -52,7 +52,7 @@ const q2 = new Question(
 const q3 = new Question(
   "Which method returns the length of the string?",
   ".length()",
-  ".size(",
+  ".size()",
   ".index()",
   ".length()",
   "None of the above"
@@ -63,7 +63,8 @@ const q4 = new Question(
   ".toUpperCase()",
   ".toUpperCase()",
   ".toString()",
-  ".toLowercase()"
+  ".toLowercase()",
+  '.stringify()'
 );
 
 const q5 = new Question(
@@ -77,12 +78,12 @@ const q5 = new Question(
 
 // Variables
 const questions = [q1, q2, q3, q4, q5];
-let score = 0;
+let score = 00;
 var highScores = JSON.parse(localStorage.getItem("highscores"));
 if (!highScores) {
   highScores = [];
 }
-var time = 60;
+
 let timer;
 var index = 0;
 const hState = highScoreContainer.getAttribute("data-active");
@@ -109,13 +110,13 @@ function scoreChecker(score) {
   }
 }
 function toggleHS() {
-  if (highscoresTxt.textContent != "Go Back") {
+  if (highscoresBtn.textContent != "Go Back") {
     highScoreContainer.style.display = "block";
     introContainer.style.display = "none";
     quizContainer.style.display = "none";
     endContainer.style.display = "none";
     highScoreContainer.setAttribute("data-active", "true");
-    highscoresTxt.textContent = "Go Back";
+    highscoresBtn.textContent = "Go Back";
     lastScoreTxt.textContent = score;
     loadHS();
   } else {
@@ -132,8 +133,9 @@ function loadHS() {
       highScores.sort((a, b) => (a.score < b.score ? 1 : -1));
       for (i = 0; i <=hs.length-1; i++) {
         var li = document.createElement("li");
+        
         highScoreUl.appendChild(li);
-        li.textContent = `${highScores[i].initials} ${highScores[i].score}`;
+        li.textContent = `${highScores[i].initials}      ${highScores[i].score}`;
       }
     }
   }
@@ -143,10 +145,11 @@ function loadHS() {
 
 // timer
 function startTimer() {
+  var time = 60;
   timer = setInterval(function () {
     timerTxt.textContent = `${time}`;
     time--;
-    if (time == 0) {
+    if (time == -2) {
       clearInterval(timer);
       alert(`You have exceeded the given time. \n Please try again!`);
       reset();
@@ -211,7 +214,7 @@ function reset() {
   introContainer.style.display = "block";
   quizContainer.style.display = "none";
   highScoreContainer.style.display = "none";
-  highscoresTxt.textContent = "View Highscores";
+  highscoresBtn.textContent = "View Highscores";
   endContainer.style.display = "none";
   while (highScoreUl.firstChild) {
     highScoreUl.removeChild(highScoreUl.firstChild);
@@ -220,5 +223,5 @@ function reset() {
 
 startBtn.addEventListener("click", start);
 quizContainer.addEventListener("click", selAnsw);
-highscoresTxt.addEventListener("click", toggleHS);
+highscoresBtn.addEventListener("click", toggleHS);
 subBtn.addEventListener("click", subBtnPressed);

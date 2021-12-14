@@ -9,31 +9,31 @@
 </head>
 <body>
     <header>
-        <button id="highscoresTxt" cursor='pointer'>View Highscores</button>
-    <h3>Time: <span id='timerTxt'>60</span></h3>
+        <button id="highscoresBtn" cursor="">View Highscores</button>
+    <h3 id="timeEl">Time: <span id='timerTxt'>60</span></h3>
     </header>
-    <section id='introContainer' data-active='active'>
+    <section id='introContainer' class="container">
          <h1>Test your coding abilities here</h1>
          <p>Take a little time and test your knowledge of coding</p>
     <button id="takeTestBtn">
         Take Test
     </button>
     </section>
-    <section id="quiz" data-active='not-avtive'>
+    <section id="quiz" class="container">
         <h2 id = questionTxt>Question</h2>
         <ul id="answersList">
-            <li>A. <span id=a1 ></span> </li>
-            <li>B. <span id=a2></span> </li>
-            <li>C. <span id=a3></span> </li>
-            <li>D. <span id=a4></span> </li>
+            <li class="answer">A. <span id=a1 ></span> </li>
+            <li class="answer">B. <span id=a2></span> </li>
+            <li class="answer">C. <span id=a3></span> </li>
+            <li class="answer">D. <span id=a4></span> </li>
         </ul>
     </section>
-    <section id="highscoresContainer">
+    <section id="highscoresContainer" class="container">
         <h2>Highscores</h2>
         <ol id="highScoreList"></ol>
         <p>Last Score: <span id="last-score"></span></p>
     </section>
-    <section id='endContainer'>
+    <section id='endContainer' class="container">
         <h2>All Finished</h2>
         <p>You scored <span id="scoreTxt"></span> out of 50</p>
         <input type="text" id="initialsTxtField" name="initialsTxtField" placeholder="Initials">
